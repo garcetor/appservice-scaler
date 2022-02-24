@@ -25,8 +25,16 @@ foreach ($appserviceplan in $appserviceplan_config) {
     $appserviceplan_name = $appserviceplan_tokens[1]
     $appserviceplan_workers = [int]$appserviceplan_tokens[2]
 
-    Set-AzAppServicePlan `
-        -NumberofWorkers $appserviceplan_workers `
-        -Name $appserviceplan_name `
-        -ResourceGroupName $appserviceplan_rg
+    try
+    {
+        Set-AzAppServicePlan `
+            -NumberofWorkers $appserviceplan_workers `
+            -Name $appserviceplan_name `
+            -ResourceGroupName $appserviceplan_rg
+    }
+    catch
+    {
+        Write-Host "An error occurred when scaling out service plan '${appserviceplan_rg/appserviceplan_name}'"
+        Write-Host $_
+    }
 }
