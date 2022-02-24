@@ -1,5 +1,7 @@
 Param(
- [string[]]$appserviceplan_config
+ [string[]]
+ # List of strings with the convention "<-ResourceGroupName>|<-AppServicePlanName>|<-NumberOfWorkers>"
+ $appserviceplan_config
 )
 
 # Ensures you do not inherit an AzContext in your runbook
