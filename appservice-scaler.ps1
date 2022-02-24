@@ -1,7 +1,7 @@
 Param(
  [string[]]
  # List of strings with the convention "<ResourceGroupName>|<AppServicePlanName>|<NumberOfWorkers>"
- $appserviceplan_config
+ $appserviceplan_config,
 
  [int]
  # Number of worker instances to increase on each try
