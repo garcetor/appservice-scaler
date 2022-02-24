@@ -1,7 +1,7 @@
 Param(
  [string[]]
  # List of strings with the convention "<ResourceGroupName>|<AppServicePlanName>|<NumberOfWorkers>"
- $appserviceplan_config,
+ $appserviceplan_config
 
  [int]
  # Number of worker instances to increase on each try
@@ -44,7 +44,7 @@ foreach ($appserviceplan in $appserviceplan_config) {
                 $target_worker_count = $desired_worker_count
             }
 
-            Write-Output "App Service Plan '$appserviceplan_rg/$appserviceplan_name' not at desired worker count capacity '$current_worker_count', trying to increase to '$target_worker_count' workers"
+            Write-Output "App Service Plan '$appserviceplan_rg/$appserviceplan_name' not at desired worker count capacity '$desired_worker_count', trying to increase from '$current_worker_count' to '$target_worker_count' workers"
 
             Set-AzAppServicePlan `
                 -ResourceGroupName $appserviceplan_rg `
@@ -53,7 +53,7 @@ foreach ($appserviceplan in $appserviceplan_config) {
         }
         else
         {
-            Write-Output "App Service Plan '$appserviceplan_rg/$appserviceplan_name' already at desired worker count capacity '$current_worker_count'"
+            Write-Output "App Service Plan '$appserviceplan_rg/$appserviceplan_name' already at desired worker count capacity '$desired_worker_count'"
         }
     }
     catch
